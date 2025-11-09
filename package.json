@@ -1,7 +1,7 @@
 {
-  "name": "template2-expressjs",
+  "name": "file-uploader",
   "version": "1.0.0",
-  "description": "Express JS template using Prisma ORM to query postgresql database instead of using libraries like 'pg'",
+  "description": "upload files like jpg,png and pdf and download them later on",
   "main": "app.js",
   "type": "module",
   "scripts": {
@@ -14,15 +14,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ChoforJr/template2-expressjs.git"
+    "url": "git+https://github.com/ChoforJr/file-uploader.git"
   },
   "keywords": [],
   "author": "FORSAKANG CHOFOR JUNIOR",
   "license": "",
   "bugs": {
-    "url": "https://github.com/ChoforJr/template2-expressjs/issues"
+    "url": "https://github.com/ChoforJr/file-uploader/issues"
   },
-  "homepage": "https://github.com/ChoforJr/template2-expressjs#readme",
+  "homepage": "https://github.com/ChoforJr/file-uploader#readme",
   "dependencies": {
     "@prisma/client": "^6.19.0",
     "@quixo3/prisma-session-store": "^3.1.13",
