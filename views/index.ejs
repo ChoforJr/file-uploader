@@ -12,14 +12,14 @@
         <h1>WELCOME BACK <%= currentUser.username %></h1>
         <% if (currentUser.is_admin == true) { %>
         <form action="/default" method="post">
-          <button type="submit" class="default">Reset to Default</button>
+          <button type="submit" class="default">Clear Database</button>
         </form>
         <% } %>
         <ul>
           <li><a href="/log-out">Log-Out</a></li>
-          <li><a href="/addAdminPage">Become an Admin</a></li>
-          <li><a href="/addFilePage">Add file</a></li>
-          <li><a href="/addFolderPage">Create folder</a></li>
+          <li><a href="/becomeAdmin">Become an Admin</a></li>
+          <li><a href="/addFile">Add file</a></li>
+          <li><a href="/addFolder">Create folder</a></li>
         </ul>
         <% } else { %>
         <h1>Create an account or Log-in to upload Your files</h1>

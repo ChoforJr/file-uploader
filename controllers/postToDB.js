@@ -1,4 +1,4 @@
-import { insertUser } from "../prisma_queries/create.js";
+import { insertUser, insertfolder } from "../prisma_queries/create.js";
 import { matchedData } from "express-validator";
 import { hash } from "bcryptjs";
 
@@ -14,13 +14,13 @@ export async function addNewUser(req, res, next) {
   }
 }
 
-// export async function addNewMessage(req, res, next) {
-//   try {
-//     const { text, title } = matchedData(req);
-//     const author = req.user.id;
-//     await insertMessage(text, title, author);
-//     res.redirect("/");
-//   } catch (err) {
-//     return next(err);
-//   }
-// }
+export async function addFolder(req, res, next) {
+  try {
+    const { title } = matchedData(req);
+    const author = Number(req.user.id);
+    await insertfolder(author, title);
+    res.redirect("/");
+  } catch (err) {
+    return next(err);
+  }
+}

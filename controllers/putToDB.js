@@ -1,6 +1,6 @@
-// import { updateToMember } from "../db/queriesPut.js";
+import { userIsAdmin } from "../prisma_queries/update.js";
 
-// export async function becomeMember(req, res) {
-//   await updateToMember(req.user.id);
-//   res.redirect("/");
-// }
+export async function userBecomeAdmin(req, res) {
+  await userIsAdmin(req.user.id);
+  res.redirect("/");
+}

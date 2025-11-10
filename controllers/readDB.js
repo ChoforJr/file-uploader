@@ -31,3 +31,17 @@ export async function logInPageGet(req, res) {
     styles: ["style.css"],
   });
 }
+
+export async function becomeAdminPage(req, res) {
+  res.render("becomeAdmin", {
+    code: "",
+    styles: ["style.css"],
+  });
+}
+
+export async function addFolderPage(req, res) {
+  res.render("createFolder", {
+    title: "",
+    styles: ["style.css"],
+  });
+}

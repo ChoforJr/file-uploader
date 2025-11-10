@@ -4,8 +4,10 @@ import {
   homePageGet,
   signUpPageGet,
   logInPageGet,
+  becomeAdminPage,
+  addFolderPage,
 } from "../controllers/readDB.js";
-import { addNewUser } from "../controllers/postToDB.js";
+import { addNewUser, addFolder } from "../controllers/postToDB.js";
 import {
   checkValidationResult,
   validateSignUpRules,
@@ -14,6 +16,15 @@ import {
   validateLogInRules,
   checkLoginValidationResult,
 } from "../controllers/validations/validateLogIn.js";
+import {
+  validateCode,
+  checkCodeValidationResult,
+} from "../controllers/validations/validateCode.js";
+import { userBecomeAdmin } from "../controllers/putToDB.js";
+import {
+  validateFolder,
+  checkFolderValidationResult,
+} from "../controllers/validations/validateFolder.js";
 
 const indexRouter = Router();
 
@@ -35,6 +46,15 @@ indexRouter.post(
     failureRedirect: "/log-in",
   })
 );
+
+indexRouter.get("/becomeAdmin", becomeAdminPage);
+indexRouter.post(
+  "/becomeAdmin",
+  validateCode,
+  checkCodeValidationResult,
+  userBecomeAdmin
+);
+
 indexRouter.get("/log-out", (req, res, next) => {
   req.logout((err) => {
     if (err) {
@@ -43,6 +63,14 @@ indexRouter.get("/log-out", (req, res, next) => {
     res.redirect("/");
   });
 });
+
+indexRouter.get("/addFolder", addFolderPage);
+indexRouter.post(
+  "/addFolder",
+  validateFolder,
+  checkFolderValidationResult,
+  addFolder
+);
 
 indexRouter.get("/", homePageGet);
 

@@ -8,3 +8,12 @@ export async function insertUser(username, password) {
     },
   });
 }
+
+export async function insertfolder(userId, title) {
+  await prisma.folders.create({
+    data: {
+      title: title,
+      authorId: userId,
+    },
+  });
+}

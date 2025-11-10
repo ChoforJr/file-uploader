@@ -1,12 +1,12 @@
-import Pool from "./pool.js";
+import prisma from "../config/prisma.js";
 
-export async function updateToMember(params) {
-  await Pool.query(
-    `
-        UPDATE users SET
-          is_member = true
-      WHERE id = $1;
-      `,
-    [params]
-  );
+export async function userIsAdmin(userId) {
+  await prisma.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      is_admin: true,
+    },
+  });
 }
