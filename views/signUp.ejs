@@ -1,17 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-  <%- include('partials/head')%>
+  <%- include('partials/head',{styles})%>
   <body>
     <a href="/">HomePage</a>
     <form action="/sign-up" method="POST">
-      <label for="fullname">Full Name: </label>
-      <input
-        id="fullname"
-        name="fullname"
-        placeholder="Kakarot Bardock"
-        type="text"
-        value="<%= fullname %>"
-      />
+      <h2>Sign-Up</h2>
       <label for="username">Email: </label>
       <input
         id="username"
@@ -34,9 +27,6 @@
         type="password"
         value="<%= confirmPassword %>"
       />
-      <label for="isAdmin">Admin</label>
-      <input type="checkbox" name="isAdmin" id="isAdmin" value="true" <%=
-      isAdmin ? 'checked' : '' %>/>
       <button type="submit">Sign Up</button>
     </form>
     <% if (locals.errors) {%> <%- include('partials/errors',{errors}) %> <% } %>

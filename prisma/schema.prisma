@@ -23,7 +23,30 @@ model Session {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  username String @unique
+  id       Int       @id @default(autoincrement())
+  username String    @unique
   password String
+  is_admin Boolean   @default(false)
+  files    Files[]
+  folders  Folders[]
+}
+
+model Files {
+  id            Int      @id @default(autoincrement())
+  original_name String
+  size          String
+  upload_time   DateTime @default(now())
+  url           String
+  author        User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId      Int
+  folders       Folders  @relation(fields: [foldersId], references: [id], onDelete: Cascade)
+  foldersId     Int
+}
+
+model Folders {
+  id       Int     @id @default(autoincrement())
+  title    String
+  author   User    @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId Int
+  files    Files[]
 }

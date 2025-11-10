@@ -1,0 +1,9 @@
+<label for="folders">Folders</label>
+<select name="folders" id="folders">
+  <option value="">Select Folders:</option>
+  <% for( let i = 0; i < folders.length; i++ ) { %>
+  <option value="/folderPage/<%= folders[i].id %>">
+    <%= folders[i].title %>
+  </option>
+  <% } %>
+</select>

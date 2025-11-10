@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-  <%- include('partials/head')%>
+  <%- include('partials/head',{styles})%>
   <body>
     <a href="/">HomePage</a>
-    <h2>Log-In</h2>
     <form action="/log-in" method="POST">
+      <h2>Log-In</h2>
       <label for="username">Email: </label>
       <input
         id="username"
