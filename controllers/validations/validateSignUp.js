@@ -9,19 +9,12 @@ export const validateSignUpRules = [
     .isLength({ min: 8, max: 250 })
     .withMessage("Email: Has to have a length of between 8 and 250")
     .custom(async (value) => {
-      const rows = await getUserInfoByUsername(value);
-      const user = rows[0];
+      const user = await getUserInfoByUsername(value);
       if (!user) {
         return true;
       }
       throw new Error("Email: Has already been Added");
     }),
-  body("fullname")
-    .trim()
-    .matches(/^[A-Za-z\s]+$/) // Allows letters and spaces
-    .withMessage("Full Name: must contain only letters")
-    .isLength({ min: 8, max: 250 })
-    .withMessage("Full Name: Has to have a length of between 8 and 250"),
   body("password")
     .trim()
     .notEmpty()
@@ -40,7 +33,6 @@ export const validateSignUpRules = [
       }
       return true;
     }),
-  body("isAdmin").optional().toBoolean(true),
 ];
 
 export const checkValidationResult = (req, res, next) => {
@@ -50,10 +42,9 @@ export const checkValidationResult = (req, res, next) => {
     return res.status(400).render("signUp", {
       errors: errors.array(),
       username: req.body.username,
-      fullname: req.body.fullname,
       password: req.body.password,
       confirmPassword: req.body.confirmPassword,
-      isAdmin: checkAdmin,
+      styles: ["style.css"],
     });
   } else {
     next();
