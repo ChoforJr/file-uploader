@@ -7,16 +7,17 @@ import {
 
 export async function homePageGet(req, res) {
   let userById = [];
+  let filesByuserId = [];
   if (req.user) {
     userById = await getUserInfoByID(req.user.id);
+    filesByuserId = await getFilesByUserID(req.user.id);
   }
-  const filesByuserId = await getFilesByUserID(req.user.id);
 
   res.render("index", {
     scripts: ["index.js"],
     styles: ["style.css", "styleTable.css"],
     currentUser: req.user,
-    files: filesByuserId || [],
+    files: filesByuserId,
     folders: userById.folders || [],
   });
 }
