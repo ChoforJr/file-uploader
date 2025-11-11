@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('partials/head',{styles})%>
+  <body>
+    <li><a href="/">Home page</a></li>
+    <section>
+      <a href="editFolderPg/<%= folder.id %>">Edit Folder</a>
+      <h2>Title: <%= folder.title %></h2>
+      <form action="/folderPage/deleteFolder/<%= folder.id %>" method="post">
+        <button type="submit">Delete Folder</button>
+      </form>
+      <%-include('partials/filesTable', {files}) %>
+    </section>
+  </body>
+</html>

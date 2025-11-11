@@ -1,16 +1,22 @@
-import { getUserInfoByID } from "../prisma_queries/find.js";
+import {
+  getUserInfoByID,
+  getFoldersByID,
+  getFilesByFolderID,
+  getFilesByUserID,
+} from "../prisma_queries/find.js";
 
 export async function homePageGet(req, res) {
   let userById = [];
   if (req.user) {
     userById = await getUserInfoByID(req.user.id);
   }
+  const filesByuserId = await getFilesByUserID(req.user.id);
 
   res.render("index", {
     scripts: ["index.js"],
     styles: ["style.css", "styleTable.css"],
     currentUser: req.user,
-    files: userById.files || [],
+    files: filesByuserId || [],
     folders: userById.folders || [],
   });
 }
@@ -43,5 +49,27 @@ export async function addFolderPage(req, res) {
   res.render("createFolder", {
     title: "",
     styles: ["style.css"],
+    action: "addFolder",
+    heading: "Create A Folder for your files",
+  });
+}
+
+export async function folderPageGet(req, res) {
+  const folder = await getFoldersByID(Number(req.params.id));
+  const files = await getFilesByFolderID(Number(req.params.id));
+  res.render("folderPage", {
+    styles: ["style.css", "styleTable.css"],
+    files: files,
+    folder: folder,
+  });
+}
+
+export async function editFolderPage(req, res) {
+  const folder = await getFoldersByID(Number(req.params.id));
+  res.render("createFolder", {
+    title: folder.title,
+    styles: ["style.css"],
+    action: "editFolder",
+    heading: "Change Folder Title",
   });
 }

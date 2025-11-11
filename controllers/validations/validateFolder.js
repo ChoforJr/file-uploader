@@ -25,10 +25,18 @@ export const validateFolder = [
 export const checkFolderValidationResult = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
+    let actionName = "addFolder";
+    let headingName = "Create A Folder for your files";
+    if (req.params.id) {
+      actionName = "editFolder";
+      headingName = "Change Folder Title";
+    }
     return res.status(400).render("createFolder", {
       errors: errors.array(),
       title: req.body.title,
       styles: ["style.css"],
+      action: actionName,
+      heading: headingName,
     });
   } else {
     next();

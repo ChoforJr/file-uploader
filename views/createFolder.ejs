@@ -3,8 +3,8 @@
   <%- include('partials/head',{styles})%>
   <body>
     <a href="/">HomePage</a>
-    <form action="/addFolder" method="POST">
-      <h2>Create A Folder for your files<h2>
+    <form action="/<%= action %>" method="POST">
+      <h2><%= heading %><h2>
       <label for="title">Title: </label>
       <input id="title" name="title" type="title" value="<%= title %>" />
       <button type="submit">Create</button>

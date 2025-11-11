@@ -26,6 +26,8 @@ import {
   checkFolderValidationResult,
 } from "../controllers/validations/validateFolder.js";
 
+import folderRouter from "./folderRouter.js";
+
 const indexRouter = Router();
 
 indexRouter.get("/sign-up", signUpPageGet);
@@ -71,6 +73,8 @@ indexRouter.post(
   checkFolderValidationResult,
   addFolder
 );
+
+indexRouter.use("/folderPage/", folderRouter);
 
 indexRouter.get("/", homePageGet);
 

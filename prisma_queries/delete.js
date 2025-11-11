@@ -1,20 +1,9 @@
-import Pool from "./pool.js";
+import prisma from "../config/prisma.js";
 
-export async function removeMessage(params) {
-  await Pool.query(
-    `
-        DELETE FROM messages
-        WHERE id = $1;
-      `,
-    [params]
-  );
-}
-
-export async function clearTables() {
-  await Pool.query(
-    `
-     TRUNCATE users RESTART IDENTITY CASCADE;
-          
-    `
-  );
+export async function delFolder(id) {
+  await prisma.folders.delete({
+    where: {
+      id: id,
+    },
+  });
 }

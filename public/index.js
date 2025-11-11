@@ -2,7 +2,7 @@ const getfolder = document.querySelector("#folders");
 
 getfolder.addEventListener("change", handleOptionChangeFolder);
 
-function handleOptionChangeFolder(event) {
+function handleOptionChangeFolder() {
   const selectedValue = this.value;
 
   if (selectedValue) {

@@ -28,8 +28,11 @@ export async function getUserInfoByID(userId) {
   return user;
 }
 
-export async function getFiles() {
+export async function getFilesByUserID(userID) {
   const files = await prisma.files.findMany({
+    where: {
+      authorId: userID,
+    },
     include: {
       folders: true,
     },
@@ -37,7 +40,23 @@ export async function getFiles() {
   return files;
 }
 
-export async function getFolders() {
-  const folders = await prisma.folders.findMany();
+export async function getFoldersByID(folderID) {
+  const folders = await prisma.folders.findUnique({
+    where: {
+      id: folderID,
+    },
+  });
   return folders;
+}
+
+export async function getFilesByFolderID(folderID) {
+  const files = await prisma.files.findMany({
+    where: {
+      foldersId: folderID,
+    },
+    include: {
+      folders: true,
+    },
+  });
+  return files;
 }
