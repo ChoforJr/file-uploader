@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('partials/head',{styles})%>
+  <body>
+    <li><a href="/">Home page</a></li>
+    <section>
+      <h2>Add File</h2>
+      <form action="/addFile" enctype="multipart/form-data" method="post">
+        <label for="folder">Select Folder:</label>
+        <select name="folder" id="folder">
+          <% for( let i = 0; i < folders.length; i++ ) { %>
+          <option value="<%= folders[i].id %>" 
+            <% if (locals.folder == folders[i].id ) { %> selected <% } %>
+            ><%= folders[i].title %></option>
+          <% } %>
+        </select>
+        <input type="file" name="uploaded_file" />
+        <button type="submit">Add file</button>
+      </form>
+      <% if (locals.errors) {%> <%- include('partials/errors',{errors}) %> <% } %>
+    </section>
+  </body>
+</html>

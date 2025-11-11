@@ -3,6 +3,7 @@ import {
   getFoldersByID,
   getFilesByFolderID,
   getFilesByUserID,
+  getFoldersByUserID,
 } from "../prisma_queries/find.js";
 
 export async function homePageGet(req, res) {
@@ -74,5 +75,14 @@ export async function editFolderPage(req, res) {
     action: `folderPage/editFolder/${req.params.id}`,
     heading: "Change Folder Title",
     submitState: "Edit",
+  });
+}
+
+export async function addFilePage(req, res) {
+  const folders = await getFoldersByUserID(Number(req.user.id));
+  res.render("addFile", {
+    title: "",
+    styles: ["style.css"],
+    folders,
   });
 }

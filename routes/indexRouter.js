@@ -27,6 +27,7 @@ import {
 } from "../controllers/validations/validateFolder.js";
 
 import folderRouter from "./folderRouter.js";
+import addFileRouter from "./addFileRouter.js";
 
 const indexRouter = Router();
 
@@ -75,6 +76,8 @@ indexRouter.post(
 );
 
 indexRouter.use("/folderPage/", folderRouter);
+
+indexRouter.use("/addFile", addFileRouter);
 
 indexRouter.get("/", homePageGet);
 

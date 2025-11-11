@@ -60,3 +60,12 @@ export async function getFilesByFolderID(folderID) {
   });
   return files;
 }
+
+export async function getFoldersByUserID(userID) {
+  const folders = await prisma.folders.findMany({
+    where: {
+      authorId: userID,
+    },
+  });
+  return folders;
+}
