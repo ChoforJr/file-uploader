@@ -27,9 +27,11 @@ export const checkFolderValidationResult = (req, res, next) => {
   if (!errors.isEmpty()) {
     let actionName = "addFolder";
     let headingName = "Create A Folder for your files";
+    let submitName = "Create";
     if (req.params.id) {
-      actionName = "editFolder";
+      actionName = `folderPage/editFolder/${req.params.id}`;
       headingName = "Change Folder Title";
+      submitName = "Edit";
     }
     return res.status(400).render("createFolder", {
       errors: errors.array(),
@@ -37,6 +39,7 @@ export const checkFolderValidationResult = (req, res, next) => {
       styles: ["style.css"],
       action: actionName,
       heading: headingName,
+      submitState: submitName,
     });
   } else {
     next();

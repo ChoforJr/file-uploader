@@ -10,3 +10,14 @@ export async function userIsAdmin(userId) {
     },
   });
 }
+
+export async function updateFolder(folderID, newTitle) {
+  await prisma.folders.update({
+    where: {
+      id: folderID,
+    },
+    data: {
+      title: newTitle,
+    },
+  });
+}

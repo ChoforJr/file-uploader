@@ -51,6 +51,7 @@ export async function addFolderPage(req, res) {
     styles: ["style.css"],
     action: "addFolder",
     heading: "Create A Folder for your files",
+    submitState: "Create",
   });
 }
 
@@ -69,7 +70,8 @@ export async function editFolderPage(req, res) {
   res.render("createFolder", {
     title: folder.title,
     styles: ["style.css"],
-    action: "editFolder",
+    action: `folderPage/editFolder/${req.params.id}`,
     heading: "Change Folder Title",
+    submitState: "Edit",
   });
 }
