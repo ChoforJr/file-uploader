@@ -21,3 +21,14 @@ export async function updateFolder(folderID, newTitle) {
     },
   });
 }
+
+export async function updateFileFolder(fileId, folderId) {
+  await prisma.files.update({
+    where: {
+      id: fileId,
+    },
+    data: {
+      foldersId: folderId,
+    },
+  });
+}

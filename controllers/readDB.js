@@ -85,3 +85,12 @@ export async function addFilePage(req, res) {
     folders,
   });
 }
+
+export async function editFilePage(req, res) {
+  const folders = await getFoldersByUserID(Number(req.user.id));
+  res.render("changeFileFolder", {
+    styles: ["style.css"],
+    folders,
+    action: `changeFolder/${req.params.id}`,
+  });
+}

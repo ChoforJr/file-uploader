@@ -6,6 +6,7 @@ import {
   logInPageGet,
   becomeAdminPage,
   addFolderPage,
+  editFilePage,
 } from "../controllers/readDB.js";
 import { addNewUser, addFolder } from "../controllers/postToDB.js";
 import {
@@ -20,11 +21,15 @@ import {
   validateCode,
   checkCodeValidationResult,
 } from "../controllers/validations/validateCode.js";
-import { userBecomeAdmin } from "../controllers/putToDB.js";
+import { userBecomeAdmin, editFileFolder } from "../controllers/putToDB.js";
 import {
   validateFolder,
   checkFolderValidationResult,
 } from "../controllers/validations/validateFolder.js";
+import {
+  validateFilesFolder,
+  checkFilesFolderValidationResult,
+} from "../controllers/validations/validateFileFolder.js";
 
 import folderRouter from "./folderRouter.js";
 import addFileRouter from "./addFileRouter.js";
@@ -73,6 +78,14 @@ indexRouter.post(
   validateFolder,
   checkFolderValidationResult,
   addFolder
+);
+
+indexRouter.get("/changeFolder/:id", editFilePage);
+indexRouter.post(
+  "/changeFolder/:id",
+  validateFilesFolder,
+  checkFilesFolderValidationResult,
+  editFileFolder
 );
 
 indexRouter.use("/folderPage/", folderRouter);
