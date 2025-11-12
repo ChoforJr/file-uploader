@@ -7,3 +7,11 @@ export async function delFolder(id) {
     },
   });
 }
+
+export async function delFile(id) {
+  await prisma.files.delete({
+    where: {
+      id: id,
+    },
+  });
+}
