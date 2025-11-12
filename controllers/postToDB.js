@@ -31,6 +31,9 @@ export async function addFolder(req, res, next) {
 
 export async function addFiles(req, res, next) {
   try {
+    if (!req.files || req.files.length === 0) {
+      return next(new Error("File upload failed, no files object found."));
+    }
     const { folder } = matchedData(req);
     const author = Number(req.user.id);
     const folderId = Number(folder);
