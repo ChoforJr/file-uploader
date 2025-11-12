@@ -7,7 +7,6 @@ import {
   becomeAdminPage,
   addFolderPage,
   editFilePage,
-  downloadFile,
 } from "../controllers/readDB.js";
 import { addNewUser, addFolder } from "../controllers/postToDB.js";
 import {
@@ -91,8 +90,6 @@ indexRouter.post(
 );
 
 indexRouter.post("/deleteFile/:id", deleteFile);
-
-indexRouter.get("/downloadFile/:id", downloadFile);
 
 indexRouter.use("/folderPage/", folderRouter);
 

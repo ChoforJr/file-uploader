@@ -22,9 +22,13 @@
       >
     </td>
     <td>
-      <form action="/downloadFile/<%= files[i].id %>" method="get">
-        <button type="submit" class="downloadBtn">Download</button>
-      </form>
+      <% // This splits the URL and inserts the 'fl_attachment' flag const
+      urlParts = files[i].url.split('/upload/'); const downloadUrl = urlParts[0]
+      + '/upload/fl_attachment/' + urlParts[1]; %>
+
+      <a href="<%= downloadUrl %>" download="<%= files[i].original_name %>">
+        <button type="button" class="downloadBtn">Download</button>
+      </a>
     </td>
     <td>
       <form action="/deleteFile/<%= files[i].id %>" method="post">

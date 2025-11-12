@@ -11,11 +11,8 @@ import { cloudStorage } from "../config/cloudinary.js";
 const allowedMimeTypes = ["image/jpeg", "image/png", "application/pdf"];
 const fileFilter = (req, file, cb) => {
   if (allowedMimeTypes.includes(file.mimetype)) {
-    // This file type is allowed
     cb(null, true);
   } else {
-    // This file type is not allowed
-    // Pass an error to be caught by the global error handler
     cb(
       new Error("Invalid file type. Only JPG, PNG, and PDF are allowed."),
       false

@@ -9,8 +9,7 @@ dotenv.config({ path: path.resolve(process.cwd(), ".env") });
 export const cloudStorage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    asset_folder: "file-uploader", // A folder name in your Cloudinary account
-    allowed_formats: ["jpg", "png", "jpeg", "pdf"], // Allowed formats
-    // You can add more transformation parameters here if needed
+    asset_folder: "file-uploader",
+    allowed_formats: ["jpg", "png", "jpeg", "pdf"],
   },
 });
