@@ -4,27 +4,27 @@
   </caption>
   <tr>
     <th>Name</th>
-    <th>Size</th>
+    <th>Size (kb)</th>
     <th>Upload Time</th>
     <th>Folder</th>
     <th>Download</th>
-    <th>Change Folder</th>
     <th>Delete</th>
   </tr>
   <% for( let i = 0; i < files.length; i++ ) { %>
   <tr>
     <td><%= files[i].original_name %></td>
-    <td><%= files[i].size %></td>
+    <td><%= files[i].size/1000 %></td>
     <td><%= files[i].upload_time %></td>
-    <td><%= files[i].folders.title %></td>
+    <td>
+      <%= files[i].folders.title %>
+      <button id="<%= files[i].id %>" class="changeBtn">Change</button>
+    </td>
     <td>
       <form action="/downloadFile/<%= files[i].id %>" method="get">
         <button type="submit">Download</button>
       </form>
     </td>
-    <td>
-      <button id="<%= files[i].id %>" class="changeBtn">Change</button>
-    </td>
+
     <td>
       <form action="/deleteFile/<%= files[i].id %>" method="post">
         <button type="submit">Delete</button>

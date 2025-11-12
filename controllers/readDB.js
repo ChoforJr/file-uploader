@@ -81,7 +81,6 @@ export async function editFolderPage(req, res) {
 export async function addFilePage(req, res) {
   const folders = await getFoldersByUserID(Number(req.user.id));
   res.render("addFile", {
-    title: "",
     styles: ["style.css"],
     folders,
   });

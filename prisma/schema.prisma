@@ -34,7 +34,8 @@ model User {
 model Files {
   id            Int      @id @default(autoincrement())
   original_name String
-  size          String
+  filename      String
+  size          Int
   upload_time   DateTime @default(now())
   url           String
   author        User     @relation(fields: [authorId], references: [id], onDelete: Cascade)

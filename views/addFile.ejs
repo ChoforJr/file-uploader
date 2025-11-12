@@ -17,7 +17,7 @@
             ><%= folders[i].title %></option>
           <% } %>
         </select>
-        <input type="file" name="uploaded_file" />
+        <input type="file" name="uploads" />
         <button type="submit">Add file</button>
       </form>
       <% if (locals.errors) {%> <%- include('partials/errors',{errors}) %> <% } %>

@@ -1,4 +1,8 @@
-import { insertUser, insertfolder } from "../prisma_queries/create.js";
+import {
+  insertUser,
+  insertfolder,
+  insertFiles,
+} from "../prisma_queries/create.js";
 import { matchedData } from "express-validator";
 import { hash } from "bcryptjs";
 
@@ -24,3 +28,32 @@ export async function addFolder(req, res, next) {
     return next(err);
   }
 }
+
+export async function addFiles(req, res, next) {
+  try {
+    const { folder } = matchedData(req);
+    const author = Number(req.user.id);
+    const folderId = Number(folder);
+    insertFiles(
+      req.file.originalname,
+      req.file.filename,
+      req.file.size,
+      req.file.path,
+      author,
+      folderId
+    );
+    // console.log(req.file);
+    res.redirect("/");
+  } catch (err) {
+    return next(err);
+  }
+}
+
+// data: {
+//   original_name: originalName,
+//   filename:      fileName,
+//   size:          fileSize,
+//   url :          filePath,
+//   authorId      :userId,
+//   foldersId     :folderID,
+// },
