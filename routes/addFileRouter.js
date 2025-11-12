@@ -21,7 +21,7 @@ const addFileRouter = Router();
 
 addFileRouter.post(
   "/",
-  uploads.single("uploads"),
+  uploads.array("uploads", 5),
   validateFilesFolder,
   checkFilesFolderValidationResult,
   addFiles

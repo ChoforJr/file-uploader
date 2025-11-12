@@ -18,26 +18,9 @@ export async function insertfolder(userId, title) {
   });
 }
 
-export async function insertFiles(
-  originalName,
-  fileName,
-  fileSize,
-  filePath,
-  userId,
-  folderID
-) {
-  await prisma.files.create({
-    data: {
-      original_name: originalName,
-      filename: fileName,
-      size: fileSize,
-      url: filePath,
-      authorId: userId,
-      foldersId: folderID,
-    },
+export async function insertFiles(data) {
+  await prisma.files.createMany({
+    data,
+    skipDuplicates: true,
   });
 }
-// await prisma.files.createMany({
-//   data,
-//   skipDuplicates: true, // Skip 'Bobo'
-// })

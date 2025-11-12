@@ -17,8 +17,8 @@
             ><%= folders[i].title %></option>
           <% } %>
         </select>
-        <input type="file" name="uploads" />
-        <button type="submit">Add file</button>
+        <input type="file" name="uploads" multiple/>
+        <button type="submit">Add file(s)</button>
       </form>
       <% if (locals.errors) {%> <%- include('partials/errors',{errors}) %> <% } %>
     </section>

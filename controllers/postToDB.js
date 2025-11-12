@@ -34,26 +34,20 @@ export async function addFiles(req, res, next) {
     const { folder } = matchedData(req);
     const author = Number(req.user.id);
     const folderId = Number(folder);
-    insertFiles(
-      req.file.originalname,
-      req.file.filename,
-      req.file.size,
-      req.file.path,
-      author,
-      folderId
-    );
-    // console.log(req.file);
+    const data = [];
+    req.files.forEach((file) => {
+      data.push({
+        original_name: file.originalname,
+        filename: file.filename,
+        size: file.size,
+        url: file.path,
+        authorId: author,
+        foldersId: folderId,
+      });
+    });
+    insertFiles(data);
     res.redirect("/");
   } catch (err) {
     return next(err);
   }
 }
-
-// data: {
-//   original_name: originalName,
-//   filename:      fileName,
-//   size:          fileSize,
-//   url :          filePath,
-//   authorId      :userId,
-//   foldersId     :folderID,
-// },
