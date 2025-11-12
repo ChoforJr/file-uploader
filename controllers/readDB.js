@@ -4,6 +4,7 @@ import {
   getFilesByFolderID,
   getFilesByUserID,
   getFoldersByUserID,
+  getFileByID,
 } from "../prisma_queries/find.js";
 
 export async function homePageGet(req, res) {
@@ -92,5 +93,14 @@ export async function editFilePage(req, res) {
     styles: ["style.css"],
     folders,
     action: `changeFolder/${req.params.id}`,
+  });
+}
+
+export async function downloadFile(req, res) {
+  const fileId = Number(req.params.id);
+  const file = await getFileByID(fileId);
+  res.download(`${file.url}`, `${file.original_name}`, (err) => {
+    if (err) throw err;
+    console.log(`${file.original_name} is unavailable`);
   });
 }
