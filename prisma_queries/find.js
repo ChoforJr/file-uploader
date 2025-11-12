@@ -45,6 +45,9 @@ export async function getFoldersByID(folderID) {
     where: {
       id: folderID,
     },
+    include: {
+      files: true,
+    },
   });
   return folders;
 }
@@ -68,4 +71,13 @@ export async function getFoldersByUserID(userID) {
     },
   });
   return folders;
+}
+
+export async function getFileByID(fileID) {
+  const file = await prisma.files.findUnique({
+    where: {
+      id: fileID,
+    },
+  });
+  return file;
 }
