@@ -6,16 +6,7 @@ import {
   checkFilesFolderValidationResult,
 } from "../controllers/validations/validateFileFolder.js";
 import { addFiles } from "../controllers/postToDB.js";
-
-const fileStorageEngine = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "./uploads");
-  },
-  filename: (req, file, cb) => {
-    const filename = Date.now() + "--" + file.originalname;
-    cb(null, filename);
-  },
-});
+import { cloudStorage } from "../config/cloudinary.js";
 
 const allowedMimeTypes = ["image/jpeg", "image/png", "application/pdf"];
 const fileFilter = (req, file, cb) => {
@@ -37,7 +28,7 @@ const limits = {
 };
 
 const uploads = multer({
-  storage: fileStorageEngine,
+  storage: cloudStorage,
   fileFilter: fileFilter,
   limits: limits,
 });
