@@ -32,3 +32,12 @@ caption {
   padding: 10px;
   background-color: blueviolet;
 }
+.deleteBtn {
+  background-color: red;
+}
+.downloadBtn {
+  background-color: green;
+}
+.changeBtn {
+  background-color: yellow;
+}

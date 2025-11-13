@@ -38,7 +38,6 @@ export const validateSignUpRules = [
 export const checkValidationResult = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    const checkAdmin = req.body.isAdmin || false;
     return res.status(400).render("signUp", {
       errors: errors.array(),
       username: req.body.username,
