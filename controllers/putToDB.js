@@ -5,11 +5,6 @@ import {
 } from "../prisma_queries/update.js";
 import { matchedData } from "express-validator";
 
-export async function userBecomeAdmin(req, res) {
-  await userIsAdmin(req.user.id);
-  res.redirect("/");
-}
-
 export async function editFolder(req, res, next) {
   try {
     const { title } = matchedData(req);

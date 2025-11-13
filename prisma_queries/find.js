@@ -81,3 +81,8 @@ export async function getFileByID(fileID) {
   });
   return file;
 }
+
+export async function getAllFiles() {
+  const files = await prisma.files.findMany();
+  return files;
+}

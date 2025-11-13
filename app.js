@@ -7,6 +7,7 @@ import passport from "passport";
 import dotenv from "dotenv";
 import "./config/passport.js";
 import { PrismaSessionStore } from "@quixo3/prisma-session-store";
+import { clearAllData } from "./controllers/deleteFromDB.js";
 
 dotenv.config({ path: path.resolve(process.cwd(), ".env") });
 
@@ -56,4 +57,5 @@ app.listen(PORT, (error) => {
     throw error;
   }
   console.log(`listening on port ${PORT}!`);
+  clearAllData.start();
 });

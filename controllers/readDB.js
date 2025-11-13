@@ -40,13 +40,6 @@ export async function logInPageGet(req, res) {
   });
 }
 
-export async function becomeAdminPage(req, res) {
-  res.render("becomeAdmin", {
-    code: "",
-    styles: ["style.css"],
-  });
-}
-
 export async function addFolderPage(req, res) {
   res.render("createFolder", {
     title: "",

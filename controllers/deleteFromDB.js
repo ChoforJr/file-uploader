@@ -1,7 +1,15 @@
+import { nodeCron as cron } from "node-cron";
 import { v2 as cloudinary } from "cloudinary";
-import { delFolder, delFile } from "../prisma_queries/delete.js";
-import { getFileByID } from "../prisma_queries/find.js";
-import { getFoldersByID } from "../prisma_queries/find.js";
+import {
+  delFolder,
+  delFile,
+  deleteAllUsers,
+} from "../prisma_queries/delete.js";
+import {
+  getFileByID,
+  getFoldersByID,
+  getAllFiles,
+} from "../prisma_queries/find.js";
 
 export async function deleteFolder(req, res, next) {
   try {
@@ -33,3 +41,21 @@ export async function deleteFile(req, res, next) {
     return next(err);
   }
 }
+
+export const clearAllData = cron.schedule("*/10 * * * *", async () => {
+  console.log("Running scheduled database cleanup task...");
+  try {
+    const files = await getAllFiles();
+    const publicIds = files.map((file) => {
+      return file.filename;
+    });
+    if (files.length == 0) {
+      return console.log("No files available");
+    }
+    await cloudinary.api.delete_resources(publicIds);
+    await deleteAllUsers();
+    console.log("Database cleared successfully.");
+  } catch (error) {
+    console.error("Error during database cleanup:", error);
+  }
+});

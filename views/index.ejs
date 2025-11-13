@@ -3,26 +3,24 @@
   <%- include('partials/head',{scripts,styles})%>
   <body>
     <aside>
-      <h1>This App allows you to upload files of formats: jpg, png and pdf</h1>
+      <h1>
+        This App allows you to upload(temporal) files of formats: jpg, png and
+        pdf
+      </h1>
       <ul>
         <li><a href="/">Home page</a></li>
       </ul>
       <nav>
         <% if ( currentUser ) {%>
         <h1>WELCOME BACK <%= currentUser.username %></h1>
-        <% if (currentUser.is_admin == true) { %>
-        <form action="/default" method="post">
-          <button type="submit" class="default">Clear Database</button>
-        </form>
-        <% } %>
         <ul>
           <li><a href="/log-out">Log-Out</a></li>
-          <li><a href="/becomeAdmin">Become an Admin</a></li>
           <li><a href="/addFile">Add file</a></li>
           <li><a href="/addFolder">Create folder</a></li>
         </ul>
         <% } else { %>
         <h1>Create an account or Log-in to upload Your files</h1>
+        <h1>Note that this app is scheduled to clear all data every 10 mins</h1>
         <ul>
           <li><a href="/sign-up">Sign-Up</a></li>
           <li><a href="/log-in">Log-In</a></li>

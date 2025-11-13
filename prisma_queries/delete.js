@@ -15,3 +15,7 @@ export async function delFile(id) {
     },
   });
 }
+
+export async function deleteAllUsers() {
+  await prisma.user.deleteMany({});
+}
