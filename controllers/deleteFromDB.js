@@ -16,6 +16,10 @@ export async function deleteFolder(req, res, next) {
     const folderId = Number(req.params.id);
     const folders = await getFoldersByID(folderId);
     const files = folders.files;
+    if (files.length == 0) {
+      await delFolder(folderId);
+      res.redirect("/");
+    }
     const publicIds = files.map((file) => {
       return file.filename;
     });
@@ -46,12 +50,12 @@ export const clearAllData = cron.schedule("*/10 * * * *", async () => {
   console.log("Running scheduled database cleanup task...");
   try {
     const files = await getAllFiles();
-    const publicIds = files.map((file) => {
-      return file.filename;
-    });
     if (files.length == 0) {
       return console.log("No files available");
     }
+    const publicIds = files.map((file) => {
+      return file.filename;
+    });
     await cloudinary.api.delete_resources(publicIds);
     await deleteAllUsers();
     console.log("Database cleared successfully.");
