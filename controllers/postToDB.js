@@ -42,13 +42,14 @@ export async function addFiles(req, res, next) {
       data.push({
         original_name: file.originalname,
         filename: file.filename,
+        mimetype: file.mimetype,
         size: file.size,
         url: file.path,
         authorId: author,
         foldersId: folderId,
       });
     });
-    insertFiles(data);
+    await insertFiles(data);
     res.redirect("/");
   } catch (err) {
     return next(err);
