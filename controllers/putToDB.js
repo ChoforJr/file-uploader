@@ -1,4 +1,8 @@
-import { updateFolder, updateFileFolder } from "../prisma_queries/update.js";
+import {
+  userIsAdmin,
+  updateFolder,
+  updateFileFolder,
+} from "../prisma_queries/update.js";
 import { matchedData } from "express-validator";
 
 export async function editFolder(req, res, next) {
@@ -22,4 +26,9 @@ export async function editFileFolder(req, res, next) {
   } catch (err) {
     return next(err);
   }
+}
+
+export async function userBecomeAdmin(req, res) {
+  await userIsAdmin(req.user.id);
+  res.redirect("/");
 }

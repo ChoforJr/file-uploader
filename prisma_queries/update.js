@@ -21,3 +21,14 @@ export async function updateFileFolder(fileId, folderId) {
     },
   });
 }
+
+export async function userIsAdmin(userId) {
+  await prisma.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      is_admin: true,
+    },
+  });
+}

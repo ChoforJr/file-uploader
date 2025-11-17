@@ -87,3 +87,10 @@ export async function editFilePage(req, res) {
     action: `changeFolder/${req.params.id}`,
   });
 }
+
+export async function becomeAdminPage(req, res) {
+  res.render("becomeAdmin", {
+    code: "",
+    styles: ["style.css"],
+  });
+}
