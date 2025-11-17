@@ -50,16 +50,38 @@ export const clearAllData = cron.schedule("*/10 * * * *", async () => {
   console.log("Running scheduled database cleanup task...");
   try {
     const files = await getAllFiles();
+    await deleteAllUsers();
     if (files.length == 0) {
-      return console.log("No files available");
+      console.log("No files available");
+      res.redirect("/");
+      return;
     }
     const publicIds = files.map((file) => {
       return file.filename;
     });
     await cloudinary.api.delete_resources(publicIds);
-    await deleteAllUsers();
     console.log("Database cleared successfully.");
   } catch (error) {
     console.error("Error during database cleanup:", error);
   }
 });
+
+export async function deleteAllManually(req, res, next) {
+  try {
+    console.log("Running manual database cleanup task...");
+    const files = await getAllFiles();
+    await deleteAllUsers();
+    if (files.length == 0) {
+      console.log("No files available");
+      res.redirect("/");
+      return;
+    }
+    const publicIds = files.map((file) => {
+      return file.filename;
+    });
+    await cloudinary.api.delete_resources(publicIds);
+    console.log("Database cleared successfully.");
+  } catch (error) {
+    console.error("Error during database cleanup:", error);
+  }
+}

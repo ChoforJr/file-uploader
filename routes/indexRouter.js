@@ -30,7 +30,7 @@ import {
   validateFilesFolder,
   checkFilesFolderValidationResult,
 } from "../controllers/validations/validateFileFolder.js";
-import { deleteFile } from "../controllers/deleteFromDB.js";
+import { deleteFile, deleteAllManually } from "../controllers/deleteFromDB.js";
 
 import folderRouter from "./folderRouter.js";
 import addFileRouter from "./addFileRouter.js";
@@ -90,6 +90,8 @@ indexRouter.post(
 );
 
 indexRouter.post("/deleteFile/:id", deleteFile);
+
+indexRouter.post("/default", deleteAllManually);
 
 indexRouter.use("/folderPage/", folderRouter);
 
